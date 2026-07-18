@@ -132,25 +132,33 @@ document.addEventListener('DOMContentLoaded', async () => {
       const { business, creator } = await fetchSpotlightStories();
       const panels = spotlightSection.querySelectorAll('.spotlight');
       const fill = (panel, story, tagLabel) => {
-        if (!story) { panel.hidden = true; return; }
+        if (!story) { panel.hidden = true; panel.style.display = 'none'; return; }
         panel.hidden = false;
+        panel.style.display = '';
         const img = panel.querySelector('.spotlight__media img');
         if (img) { img.src = story.img; img.alt = story.title; }
         const tag = panel.querySelector('.pill--outline');
         if (tag) tag.textContent = tagLabel;
         const heading = panel.querySelector('.spotlight__body h2');
         if (heading) heading.textContent = story.title;
+        // Only one paragraph of real copy exists per story (the excerpt) —
+        // fill the first <p> with it and remove any other static <p> left
+        // over in the markup so no old placeholder copy can survive.
         const paras = panel.querySelectorAll('.spotlight__body p:not(.pill)');
-        if (paras[0]) paras[0].textContent = story.excerpt;
+        paras.forEach((p, i) => {
+          if (i === 0) p.textContent = story.excerpt;
+          else p.remove();
+        });
         const link = panel.querySelector('.link-arrow');
         if (link) link.setAttribute('href', `story.html?slug=${story.id}`);
       };
       if (panels[0]) fill(panels[0], business, 'Local Business of the Month');
       if (panels[1]) fill(panels[1], creator, 'Creator Spotlight');
-      if (!business && !creator) spotlightSection.hidden = true;
+      if (!business && !creator) { spotlightSection.hidden = true; spotlightSection.style.display = 'none'; }
     } catch (err) {
       console.error('Could not load spotlight stories:', err);
       spotlightSection.hidden = true;
+      spotlightSection.style.display = 'none';
     }
   }
 

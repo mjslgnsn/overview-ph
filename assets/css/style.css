@@ -674,6 +674,8 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
    SPOTLIGHT (reusable component)
    ============================================================ */
 .spotlight-section { background: var(--dark-plum); padding: var(--section-pad) 0; }
+.spotlight-section[hidden] { display: none !important; }
+.spotlight[hidden] { display: none !important; }
 .spotlight {
   max-width: var(--container);
   margin: 0 auto;
