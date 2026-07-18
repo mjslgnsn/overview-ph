@@ -7,7 +7,7 @@
    ============================================================ */
 
 import { PILLARS } from "./pillars-data.js";
-import { fetchPublishedStories, fetchSpotlightStories, fetchAuthorAvatarMap, avatarMarkup } from "./data-service.js";
+import { fetchPublishedStories, fetchSpotlightStories, fetchAuthorAvatarMap, avatarMarkup, computeSiteStats, renderSiteStats } from "./data-service.js";
 import { initMap } from "./map.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.error('Could not load stories from Firestore:', err);
   }
+
+  /* ---------------------------------------------------------
+     ABOUT STRIP STATS — replaces the old hardcoded "50+ / 100+ /
+     30+" placeholder numbers with real counts derived from
+     published stories.
+     --------------------------------------------------------- */
+  renderSiteStats(computeSiteStats(allPosts));
 
   /* ---------------------------------------------------------
      HERO CAROUSEL — auto-sliding, built from the hero images of
@@ -136,7 +143,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         panel.hidden = false;
         panel.style.display = '';
         const img = panel.querySelector('.spotlight__media img');
-        if (img) { img.src = story.img; img.alt = story.title; }
+        if (img) {
+          // The placeholder src in the static markup 404s on first paint,
+          // which permanently hides the element via its onerror handler.
+          // Clear that before pointing it at the real Firestore hero image,
+          // and re-arm onerror in case the real URL itself ever fails.
+          img.style.display = '';
+          img.onerror = function () { this.style.display = 'none'; };
+          img.src = story.img;
+          img.alt = story.title;
+        }
         const tag = panel.querySelector('.pill--outline');
         if (tag) tag.textContent = tagLabel;
         const heading = panel.querySelector('.spotlight__body h2');

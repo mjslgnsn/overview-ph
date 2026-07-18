@@ -145,13 +145,28 @@ export async function fetchStoryContent(slug) {
 
 /** Every author doc in Studio, as-is ({ name, avatarUrl, ... }). */
 export async function fetchAuthors() {
-  const snap = await getDocs(collection(db, AUTHORS));
-  return snap.docs.map((d) => ({ docId: d.id, ...d.data() }));
+  try {
+    const snap = await getDocs(collection(db, AUTHORS));
+    return snap.docs.map((d) => ({ docId: d.id, ...d.data() }));
+  } catch (err) {
+    // Surface this loudly — a silently-swallowed error here (e.g. Firestore
+    // security rules not allowing public reads on "authors") is the #1
+    // reason avatars would fail to show up anywhere on the site with no
+    // visible symptom. Check the browser console for this exact message.
+    console.error(
+      '[data-service] Could not read the "authors" collection from Firestore. ' +
+      'If this says "permission-denied" or "Missing or insufficient permissions", ' +
+      'your Firestore security rules likely allow public reads on "stories" but ' +
+      'not on "authors" — add a matching read rule for the authors collection. ' +
+      'Full error:', err
+    );
+    return [];
+  }
 }
 
 /** Map of lowercased author name -> avatarUrl, for quick lookup while rendering story cards. */
 export async function fetchAuthorAvatarMap() {
-  const authors = await fetchAuthors().catch(() => []);
+  const authors = await fetchAuthors();
   const map = new Map();
   authors.forEach((a) => {
     if (a.name && a.avatarUrl) map.set(a.name.trim().toLowerCase(), a.avatarUrl);
@@ -178,8 +193,11 @@ export function avatarMarkup(name, avatarMap) {
  */
 export async function fetchContributors() {
   const [authors, stories] = await Promise.all([
-    fetchAuthors().catch(() => []),
-    fetchPublishedStories().catch(() => [])
+    fetchAuthors(),
+    fetchPublishedStories().catch((err) => {
+      console.error('[data-service] Could not read the "stories" collection from Firestore:', err);
+      return [];
+    })
   ]);
 
   const avatarByName = new Map();
@@ -208,4 +226,62 @@ export async function fetchContributors() {
   return Array.from(byName.values())
     .map((c) => ({ ...c, categories: Array.from(c.categories) }))
     .sort((a, b) => b.count - a.count);
+}
+
+/* ============================================================
+   SITE STATS
+   ------------------------------------------------------------
+   Real numbers for the "50+ Provinces Covered / 100+ Stories
+   Published / 30+ Creators Interviewed" stat row on the
+   homepage About strip and the Company page — replacing the
+   placeholder numbers from the very first mockup, which never
+   got wired up to actual data.
+
+   Takes an already-fetched posts array (both index.html and
+   contact.html fetch published stories anyway) rather than
+   hitting Firestore again.
+   ============================================================ */
+export function computeSiteStats(posts) {
+  const storiesPublished = posts.length;
+
+  // "Province" isn't its own field — Studio only stores a free-text
+  // placeName (e.g. "Lipa, Batangas" or just "Bagac"). Best-effort: take
+  // whatever's after the last comma as the province, else use the whole
+  // name, then de-dupe case-insensitively.
+  const provinces = new Set(
+    posts
+      .filter((p) => p.place && p.place.name)
+      .map((p) => {
+        const parts = p.place.name.split(',');
+        return parts[parts.length - 1].trim().toLowerCase();
+      })
+  );
+
+  const creators = new Set(
+    posts.filter((p) => p.author).map((p) => p.author.trim().toLowerCase())
+  );
+
+  return {
+    provincesCovered: provinces.size,
+    storiesPublished,
+    creatorsInterviewed: creators.size
+  };
+}
+
+/**
+ * Writes a computed stats object into the shared stat-row markup
+ * (used identically on index.html's About strip and contact.html's
+ * About section). Numbers below the "floor" just show the real
+ * count — no more hardcoded "50+" placeholders.
+ */
+export function renderSiteStats(stats) {
+  const map = {
+    statProvinces: stats.provincesCovered,
+    statStories: stats.storiesPublished,
+    statCreators: stats.creatorsInterviewed
+  };
+  Object.entries(map).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = String(value);
+  });
 }

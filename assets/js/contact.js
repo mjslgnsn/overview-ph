@@ -7,7 +7,7 @@
    only appears here once they've actually published something.
    ============================================================ */
 
-import { fetchContributors } from "./data-service.js";
+import { fetchContributors, fetchPublishedStories, computeSiteStats, renderSiteStats } from "./data-service.js";
 
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, (c) => ({
@@ -16,6 +16,17 @@ function escapeHtml(str) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  /* ---------------------------------------------------------
+     ABOUT SECTION STATS — same real numbers as the homepage,
+     replacing the old hardcoded "50+ / 100+ / 30+" placeholders.
+     --------------------------------------------------------- */
+  try {
+    const posts = await fetchPublishedStories();
+    renderSiteStats(computeSiteStats(posts));
+  } catch (err) {
+    console.error('Could not load stories from Firestore for About stats:', err);
+  }
+
   const grid = document.getElementById('contributorsGrid');
   if (!grid) return;
   const emptyNote = document.getElementById('contributorsEmpty');

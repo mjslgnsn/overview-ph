@@ -91,10 +91,99 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (firstPara) firstPara.classList.add('story-p--dropcap');
   Array.from(bodyEl.children).forEach(el => el.classList.add('reveal'));
 
-  // The old pinned horizontal gallery needed structured data this
-  // template doesn't produce anymore — authors now drop images inline
-  // in the article HTML instead, so this section stays hidden.
-  document.getElementById('storyGallerySection')?.setAttribute('hidden', '');
+  /* ---------------------------------------------------------
+     2b. Optional in-article pinned scroll gallery.
+         Authors can drop this anywhere in their story HTML to
+         get the "wow" horizontal-scroll photo moment mid-article:
+
+           <div data-story-gallery="Optional Kicker Text">
+             <figure>
+               <img src="..." alt="...">
+               <figcaption>Caption. Photo: Name / Unsplash.</figcaption>
+             </figure>
+             <figure>...</figure>
+           </div>
+
+         Everything before the marker stays in the main article
+         body; everything after it is moved into a second article
+         section that renders below the gallery, so the gallery
+         sits "in the middle" of the story instead of at the end.
+     --------------------------------------------------------- */
+  const gallerySection = document.getElementById('storyGallerySection');
+  const galleryTrack = document.getElementById('storyGalleryTrack');
+  const galleryMarker = bodyEl.querySelector('[data-story-gallery]');
+
+  if (galleryMarker && gallerySection && galleryTrack) {
+    const figures = Array.from(galleryMarker.querySelectorAll('figure'));
+
+    galleryTrack.innerHTML = figures.map(fig => {
+      const img = fig.querySelector('img');
+      const caption = fig.querySelector('figcaption');
+      const src = img ? img.getAttribute('src') : '';
+      const alt = img ? (img.getAttribute('alt') || '') : '';
+      const captionHtml = caption ? caption.innerHTML : '';
+      return `
+        <figure class="story-gallery__item">
+          <div class="story-gallery__img" role="img" aria-label="${alt.replace(/"/g, '&quot;')}" style="background-image: url('${src}');"></div>
+          <figcaption>${captionHtml}</figcaption>
+        </figure>`;
+    }).join('');
+
+    const kickerEl = gallerySection.querySelector('.story-gallery__kicker');
+    if (kickerEl) {
+      const kickerText = galleryMarker.getAttribute('data-story-gallery');
+      if (kickerText) kickerEl.textContent = kickerText;
+    }
+
+    // Move everything that came after the marker into a new
+    // "continued" article section, then drop the marker itself.
+    const continuedBody = document.createElement('div');
+    continuedBody.className = 'story-article__body';
+    while (galleryMarker.nextSibling) {
+      continuedBody.appendChild(galleryMarker.nextSibling);
+    }
+    galleryMarker.remove();
+
+    gallerySection.hidden = false;
+
+    if (continuedBody.childNodes.length) {
+      const continuedSection = document.createElement('section');
+      continuedSection.className = 'story-article story-article--continued';
+      continuedSection.innerHTML = '<aside class="story-share" aria-hidden="true"></aside>';
+      continuedSection.appendChild(continuedBody);
+      gallerySection.after(continuedSection);
+    }
+
+    // Pinned horizontal-scroll behavior (desktop); becomes a plain
+    // swipeable strip on narrow screens via the CSS breakpoint.
+    const setGalleryHeight = () => {
+      if (window.innerWidth >= 900) {
+        const extra = Math.max(galleryTrack.scrollWidth - window.innerWidth, 0);
+        gallerySection.style.height = `calc(100vh + ${extra}px)`;
+      } else {
+        gallerySection.style.height = 'auto';
+        galleryTrack.style.transform = 'none';
+      }
+    };
+    const updateGalleryScroll = () => {
+      if (window.innerWidth < 900) return;
+      const rect = gallerySection.getBoundingClientRect();
+      const scrollable = gallerySection.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+      const maxTranslate = Math.max(galleryTrack.scrollWidth - window.innerWidth, 0);
+      galleryTrack.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
+    };
+    window.addEventListener('load', setGalleryHeight);
+    window.addEventListener('resize', () => { setGalleryHeight(); updateGalleryScroll(); });
+    window.addEventListener('scroll', rafThrottle(updateGalleryScroll), { passive: true });
+    setGalleryHeight();
+    updateGalleryScroll();
+  } else {
+    // No gallery marker in this story's content — keep the section
+    // hidden, same as before.
+    gallerySection?.setAttribute('hidden', '');
+  }
 
   /* ---------------------------------------------------------
      3. Related stories — same pillar, excluding this one

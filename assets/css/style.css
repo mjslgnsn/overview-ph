@@ -1383,6 +1383,11 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   color: var(--muted-rose);
 }
 
+/* Second article section that renders after an in-article gallery
+   (see story.js) — needs less top padding since the gallery above
+   it already provides the visual break. */
+.story-article--continued { padding-top: 30px; }
+
 /* ============================================================
    STORY GALLERY — pinned horizontal scroll (desktop),
    swipeable strip (mobile)
