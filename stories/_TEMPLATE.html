@@ -1,0 +1,71 @@
+<!--
+  ================================================================
+  OVERVIEW PH — STORY CONTENT TEMPLATE
+  ================================================================
+  HOW TO USE THIS FILE
+  ----------------------------------------------------------------
+  1. In Overview Studio, create/edit the story and set its Slug
+     field, e.g. "siargao-beyond-surf".
+  2. Duplicate this file and rename it to match EXACTLY:
+       stories/siargao-beyond-surf.html
+  3. Replace everything below with your article's HTML. This is
+     a FRAGMENT, not a full page — no <html>/<head>/<body>, just
+     the content that goes inside the article body. It gets
+     fetched and injected automatically by story.html.
+  4. Title, hero image, category, author, byline, and dates all
+     come from Studio automatically — don't repeat them here,
+     just write the story itself.
+
+  AVAILABLE CLASSES (already styled by the site's CSS)
+  ----------------------------------------------------------------
+  <p class="story-p">...</p>            → a normal paragraph
+    (the very first <p> gets an automatic drop-cap — no class needed)
+
+  <blockquote class="story-quote"><p>...</p></blockquote>
+    → a large pull-quote, breaks up long sections nicely
+
+  <figure class="story-figure">
+    <img src="https://res.cloudinary.com/.../photo.jpg" alt="...">
+    <figcaption>Caption text</figcaption>
+  </figure>
+    → an in-article photo. Use your Cloudinary image URL (copy it
+      from the Studio upload, or upload directly to Cloudinary).
+
+  <div class="story-stat">
+    <span class="story-stat__value" data-target="12000" data-suffix="+">0+</span>
+    <span class="story-stat__label">Description of the number</span>
+  </div>
+    → an animated count-up stat, triggers when scrolled into view
+
+  <h2 class="story-h2">A subheading</h2>
+    → use sparingly, to break a very long story into sections
+  ================================================================
+-->
+
+<p class="story-p">
+  Start your story here. This first paragraph gets an automatic drop-cap,
+  so make it a strong opening line or two.
+</p>
+
+<p class="story-p">
+  Keep writing in plain paragraphs. You can mix in photos, pull-quotes,
+  and stat blocks using the classes documented above, in whatever order
+  makes sense for the story.
+</p>
+
+<figure class="story-figure">
+  <img src="https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/REPLACE_ME.jpg" alt="Describe the photo">
+  <figcaption>Optional caption for this photo.</figcaption>
+</figure>
+
+<p class="story-p">
+  Continue the story after the photo.
+</p>
+
+<blockquote class="story-quote">
+  <p>An especially strong quote or line from the piece, set apart for emphasis.</p>
+</blockquote>
+
+<p class="story-p">
+  Wrap up the story here.
+</p>

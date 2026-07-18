@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ================================================================
+     EDIT ME: Page title + description (shows in browser tab & search)
+     ================================================================ -->
+<title>The Last Kapeng Barako Roasters of Batangas — Overview PH</title>
+<meta name="description" content="Inside the small-batch roasteries keeping a fading bean alive.">
+
+<!-- Google Fonts (same set used across the whole site — don't change) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2317433F'/%3E%3Cpath d='M50 20 L50 78 M50 30 L34 22 M50 30 L66 22 M50 44 L32 36 M50 44 L68 36 M50 58 L34 50 M50 58 L66 50' stroke='%23C89A4B' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+
+<style>
+/* ================================================================
+   OVERVIEW PH — STORY TEMPLATE (ALL-IN-ONE FILE)
+   ================================================================
+   HOW TO USE THIS FILE
+   ----------------------------------------------------------------
+   1. Duplicate this file and rename it for your new story
+      (e.g. "story-siargao.html").
+   2. Search for "EDIT ME" comments — they mark every spot you
+      should change: headline, images, byline, body paragraphs.
+   3. Images: this template uses CSS gradients as a placeholder
+      wherever an image file isn't found, so nothing ever looks
+      "broken" while you're still sourcing photography. Just point
+      the src/background-image at your real photo file and it will
+      take over automatically.
+   4. Everything — layout, color, animation — lives in this one
+      file (inline <style> below, inline <script> at the bottom),
+      so you can hand this single HTML file to anyone and it will
+      run on its own, no other files required.
+   ================================================================ */
+
+/* ---------- Brand tokens (match these across every story file) ---------- */
+:root {
+  --forest-green: #17433F;
+  --forest-deep:  #0E2B28;
+  --cream:        #F8ECD1;
+  --muted-rose:   #AC7D88;
+  --dark-plum:    #4B1426;
+  --warm-beige:   #DEB6AB;
+  --olive-green:  #558467;
+  --soft-gold:    #C89A4B;
+  --white:        #FFFFFF;
+  --ink: #1B2624;
+
+  --font-logo: 'Boldonse', sans-serif;
+  --font-hero: 'DM Serif Display', Georgia, serif;
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-label: 'Manrope', Helvetica, sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+  --container: 1240px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Shared bits ---------- */
+.eyebrow {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-rose);
+  margin-bottom: 12px;
+  display: block;
+}
+.eyebrow--light { color: var(--warm-beige); }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--olive-green);
+  color: var(--cream);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 16px 32px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
+  transition: transform .35s var(--ease), box-shadow .3s ease;
+}
+.btn--gold {
+  background: var(--soft-gold);
+  color: var(--forest-deep);
+  box-shadow: 0 8px 24px -8px rgba(200,154,75,0.55);
+}
+.btn--gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(200,154,75,0.65); }
+.btn--sm { padding: 11px 22px; font-size: 13px; }
+.link-arrow {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--soft-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.link-arrow span { transition: transform .3s var(--ease); display: inline-block; }
+.link-arrow:hover span { transform: translateX(4px); }
+
+/* scroll-reveal: fade + slide up, triggered by IntersectionObserver in the script below */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ================================================================
+   READING PROGRESS BAR — thin gold line, fills as you scroll
+   ================================================================ */
+.read-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; background: rgba(255,255,255,0.1); }
+.read-progress__bar { height: 100%; width: 0%; background: var(--soft-gold); box-shadow: 0 0 12px rgba(200,154,75,0.6); }
+
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: background .4s ease, box-shadow .4s ease, backdrop-filter .4s ease; }
+.nav__inner { max-width: var(--container); margin: 0 auto; padding: 22px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav.is-scrolled { background: rgba(23, 67, 63, 0.86); backdrop-filter: blur(16px) saturate(140%); box-shadow: 0 8px 30px -12px rgba(0,0,0,0.35); }
+.nav.is-scrolled .nav__inner { padding-top: 14px; padding-bottom: 14px; }
+.nav__logo { font-family: var(--font-logo); font-size: 20px; letter-spacing: -0.04em; color: var(--white); transform: scaleX(0.92); transform-origin: left; }
+.nav__dot { color: var(--soft-gold); }
+.nav__links { display: flex; gap: 30px; font-family: var(--font-label); font-weight: 600; font-size: 14px; }
+.nav__links a { color: rgba(255,255,255,0.88); position: relative; padding: 4px 0; }
+.nav__links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: var(--soft-gold); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+.nav__links a:hover::after { transform: scaleX(1); }
+.nav__actions { display: flex; align-items: center; gap: 14px; }
+.nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; width: 30px; height: 24px; justify-content: center; }
+.nav__burger span { display: block; height: 2px; width: 100%; background: var(--white); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s ease; }
+.nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav__mobile { display: none; flex-direction: column; background: var(--forest-deep); padding: 10px 40px 28px; gap: 4px; }
+.nav__mobile.is-open { display: flex; }
+.nav__mobile a { font-family: var(--font-label); font-weight: 600; font-size: 16px; color: var(--cream); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.nav__mobile .btn { margin-top: 14px; align-self: flex-start; }
+
+/* ================================================================
+   HERO — headline + all the story "details" (category, byline, date, read time)
+   ================================================================ */
+.story-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--forest-deep); }
+.story-hero__bg {
+  position: absolute; inset: -10% -6%;
+  background-size: cover; background-position: center;
+  /* EDIT ME: replace this gradient with your real hero photo, e.g.
+     background-image: linear-gradient(160deg, rgba(23,67,63,.45), rgba(14,43,40,.3)), url('your-photo.jpg'); */
+  background-image: linear-gradient(160deg, rgba(23,67,63,0.55), rgba(14,43,40,0.35)), linear-gradient(135deg, #2f6459, #17433f 60%, #0e2b28);
+  will-change: transform;
+}
+.story-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--forest-deep) 6%, rgba(14,43,40,0.55) 46%, rgba(14,43,40,0.08) 82%); }
+.story-hero__content { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; width: 100%; padding: 0 40px 28px; text-align: center; }
+.story-hero__tag { margin-bottom: 20px; }
+.story-hero__title { font-family: var(--font-title); font-weight: 700; font-size: clamp(30px, 5vw, 52px); line-height: 1.18; color: var(--white); }
+.story-hero__byline { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; width: 100%; padding: 0 40px 46px; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-label); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(248,236,209,0.85); flex-wrap: wrap; text-align: center; }
+.story-hero__avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--olive-green); flex-shrink: 0; }
+.dot::before { content: '·'; }
+
+/* ================================================================
+   ARTICLE BODY — shared typography for every text section
+   ================================================================ */
+.story-article { background: var(--cream); display: flex; gap: 44px; align-items: flex-start; max-width: 800px; margin: 0 auto; padding: 90px 40px 10px; }
+.story-article--continued { padding-top: 10px; }
+.story-share { position: sticky; top: 130px; display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; }
+.story-share__btn { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(23,67,63,0.18); background: var(--white); display: flex; align-items: center; justify-content: center; color: var(--forest-green); transition: background .3s ease, color .3s ease, transform .3s var(--ease), border-color .3s ease; }
+.story-share__btn:hover { background: var(--forest-green); color: var(--cream); transform: translateY(-2px); }
+.story-share__btn.is-saved { background: var(--soft-gold); border-color: var(--soft-gold); color: var(--forest-deep); }
+.story-share__note { font-family: var(--font-label); font-size: 10px; font-weight: 600; color: var(--olive-green); text-align: center; max-width: 70px; min-height: 14px; }
+.story-article__body { flex: 1; min-width: 0; max-width: 640px; }
+
+.story-lede { font-family: var(--font-hero); font-style: italic; font-size: clamp(18px, 2vw, 21px); line-height: 1.6; color: var(--forest-deep); margin-bottom: 26px; }
+.story-p { font-family: var(--font-body); font-size: 15.5px; line-height: 1.85; color: #2E3F3B; margin-bottom: 22px; }
+.story-p--dropcap::first-letter { font-family: var(--font-title); font-weight: 700; font-size: 60px; line-height: 0.75; float: left; margin: 8px 8px 0 0; color: var(--forest-green); }
+
+.story-h2 {
+  font-family: var(--font-title);
+  font-size: clamp(21px, 2.4vw, 27px);
+  color: var(--forest-deep);
+  margin: 44px 0 18px;
+  padding-top: 4px;
+}
+.story-h2__eyebrow { display: block; }
+
+/* single full-width "breather" photo between sections */
+.story-photo { margin: 34px 0 40px; }
+.story-photo__img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-lg);
+  background-size: cover; background-position: center;
+  /* EDIT ME: swap in your real photo the same way as the hero, above */
+  background-image: linear-gradient(135deg, var(--warm-beige), var(--muted-rose));
+  box-shadow: 0 24px 50px -24px rgba(23,67,63,0.35);
+}
+.story-photo figcaption { margin-top: 14px; font-size: 13px; color: var(--muted-rose); font-family: var(--font-label); }
+
+.story-quote { margin: 8px 0 30px; padding-left: 22px; border-left: 3px solid var(--soft-gold); }
+.story-quote p { font-family: var(--font-hero); font-style: italic; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.45; color: var(--forest-deep); }
+.story-quote cite { display: block; margin-top: 12px; font-family: var(--font-label); font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted-rose); }
+
+/* ================================================================
+   SCROLL PICTURE GALLERY — pinned horizontal scroll on desktop,
+   swipeable strip on mobile. This is the "wow" scroll moment.
+   ================================================================ */
+.story-gallery { background: var(--forest-deep); position: relative; }
+.story-gallery__kicker { position: absolute; top: 40px; left: 0; right: 0; text-align: center; z-index: 2; }
+.story-gallery__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+.story-gallery__track { display: flex; gap: 32px; padding: 0 9vw; will-change: transform; }
+.story-gallery__item { flex: 0 0 58vw; max-width: 760px; }
+.story-gallery__img { width: 100%; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); background-size: cover; background-position: center; background-color: #1c4a44; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55); }
+.story-gallery__item figcaption { margin-top: 16px; font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: rgba(248,236,209,0.62); max-width: 92%; }
+
+/* ================================================================
+   PHOTO / IMAGE GALLERY — a calmer grid layout, used further down
+   the article (deliberately different from the scroll gallery above)
+   ================================================================ */
+.story-photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0 10px; }
+.story-photo-grid__item { border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 16px 32px -18px rgba(23,67,63,0.35); }
+.story-photo-grid__img { width: 100%; aspect-ratio: 4 / 3; background-size: cover; background-position: center; background-image: linear-gradient(135deg, var(--olive-green), var(--forest-green)); }
+.story-photo-grid__item:first-child { grid-column: 1 / -1; }
+.story-photo-grid__item:first-child .story-photo-grid__img { aspect-ratio: 16 / 9; }
+.story-photo-grid figcaption { padding: 10px 2px 0; font-size: 12px; color: var(--muted-rose); font-family: var(--font-label); }
+
+/* ================================================================
+   INSIGHTS / KEY TAKEAWAYS — scannable highlight cards
+   ================================================================ */
+.story-takeaways { list-style: none; margin: 10px 0 10px; display: flex; flex-direction: column; gap: 14px; }
+.story-takeaways li {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 20px;
+  background: rgba(85,132,103,0.08);
+  border: 1px solid rgba(85,132,103,0.2);
+  border-radius: var(--radius-md);
+}
+.story-takeaways__num {
+  font-family: var(--font-title); font-weight: 700; font-size: 20px;
+  color: var(--soft-gold); flex-shrink: 0; line-height: 1.4;
+}
+.story-takeaways__text { font-size: 14.5px; line-height: 1.65; color: #2E3F3B; }
+.story-takeaways__text strong { color: var(--forest-deep); }
+
+/* ================================================================
+   CREDIT — who this story is actually about (not the byline author)
+   ================================================================ */
+.story-credit {
+  display: flex; align-items: center; gap: 18px;
+  margin: 40px 0 8px;
+  padding: 22px 24px;
+  background: var(--forest-green);
+  border-radius: var(--radius-md);
+}
+.story-credit__avatar {
+  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--warm-beige), var(--muted-rose));
+  background-size: cover; background-position: center;
+}
+.story-credit__name { font-family: var(--font-title); font-size: 16.5px; color: var(--cream); }
+.story-credit__role { font-family: var(--font-label); font-size: 12px; color: rgba(248,236,209,0.65); margin-top: 2px; }
+
+/* ================================================================
+   SUGGEST-A-STORY CTA — sits right after the article, before "Keep Reading"
+   ================================================================ */
+.story-cta {
+  background: var(--dark-plum);
+  padding: 70px 40px;
+  text-align: center;
+}
+.story-cta__inner { max-width: 560px; margin: 0 auto; }
+.story-cta h2 { font-family: var(--font-title); font-size: clamp(22px, 3vw, 30px); color: var(--cream); margin-bottom: 12px; }
+.story-cta p { font-size: 14.5px; line-height: 1.65; color: rgba(248,236,209,0.75); margin-bottom: 26px; }
+
+/* ================================================================
+   KEEP READING — related story cards
+   ================================================================ */
+.related { background: var(--cream); padding: 70px 0 130px; }
+.section__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; max-width: var(--container); margin: 0 auto 44px; padding: 0 40px; }
+.section__head h2 { font-family: var(--font-title); font-size: clamp(22px, 2.2vw, 29px); }
+.stories__grid { max-width: var(--container); margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.story-card { display: flex; flex-direction: column; }
+.story-card__media { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px; background: linear-gradient(135deg, var(--forest-green), var(--olive-green)); box-shadow: 0 20px 40px -24px rgba(14,43,40,0.4); }
+.story-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.story-card__tag { position: absolute; top: 16px; left: 16px; }
+.story-card h3 { font-family: var(--font-title); font-size: 17px; line-height: 1.35; margin-bottom: 6px; }
+.story-card h3 a { color: var(--forest-deep); transition: color .3s ease; }
+.story-card h3 a:hover { color: var(--olive-green); }
+.story-card__excerpt { font-size: 13px; line-height: 1.55; color: #4A5C58; margin-bottom: 14px; }
+.story-card__meta { display: flex; align-items: center; gap: 8px; font-family: var(--font-label); font-size: 11px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted-rose); }
+.story-card__avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--olive-green); flex-shrink: 0; }
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer { background: var(--forest-deep); padding: 90px 0 0; }
+.footer__top { max-width: var(--container); margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 50px; padding-bottom: 70px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer__brand p { color: rgba(248,236,209,0.55); font-size: 14px; margin: 16px 0 22px; max-width: 30ch; }
+.footer__social { display: flex; gap: 12px; }
+.footer__social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: var(--cream); transition: background .3s ease, border-color .3s ease; }
+.footer__social a:hover { background: var(--soft-gold); color: var(--forest-deep); border-color: var(--soft-gold); }
+.footer__col h3 { font-family: var(--font-label); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 20px; }
+.footer__col a { display: block; font-size: 14.5px; color: rgba(248,236,209,0.7); margin-bottom: 13px; transition: color .3s ease; }
+.footer__col a:hover { color: var(--cream); }
+.footer__col--newsletter p { font-size: 14px; color: rgba(248,236,209,0.55); margin-bottom: 16px; }
+.footer__mini-form { display: flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-pill); padding: 5px; gap: 6px; }
+.footer__mini-form input { flex: 1; border: none; background: none; padding: 9px 14px; color: var(--cream); font-size: 13.5px; }
+.footer__mini-form input::placeholder { color: rgba(248,236,209,0.4); }
+.footer__mini-form input:focus { outline: none; }
+.footer__mini-form button { width: 34px; height: 34px; border-radius: 50%; background: var(--soft-gold); color: var(--forest-deep); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .3s var(--ease); }
+.footer__mini-form button:hover { transform: translateX(2px); }
+.letter__note { margin-top: 10px; font-family: var(--font-label); font-size: 12.5px; font-weight: 600; min-height: 16px; }
+.letter__note.is-error { color: #A6425C; }
+.letter__note.is-success { color: #9fd6b4; }
+.footer__bottom { max-width: var(--container); margin: 0 auto; padding: 26px 40px 30px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: var(--font-label); font-size: 12.5px; color: rgba(248,236,209,0.45); }
+.footer__legal { display: flex; gap: 20px; }
+.footer__legal a:hover { color: var(--cream); }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1080px) {
+  .footer__top { grid-template-columns: 1fr 1fr; row-gap: 46px; }
+  .stories__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .story-article { flex-direction: column; padding: 70px 24px 10px; }
+  .story-share { position: static; flex-direction: row; justify-content: center; margin-bottom: 24px; }
+  .story-share__note { max-width: none; }
+  .story-article__body { max-width: 100%; }
+  .story-photo-grid { grid-template-columns: 1fr; }
+  .story-photo-grid__item:first-child { grid-column: auto; }
+
+  .story-gallery__kicker { top: 24px; }
+  .story-gallery__pin { position: static; height: auto; overflow-x: auto; display: flex; padding: 70px 24px 40px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
+  .story-gallery__track { transform: none !important; gap: 18px; padding: 0; }
+  .story-gallery__item { flex: 0 0 82vw; scroll-snap-align: start; }
+}
+@media (max-width: 768px) {
+  .nav__inner, .section__head, .stories__grid, .footer__top, .footer__bottom { padding-left: 24px; padding-right: 24px; }
+  .nav__links, .nav__actions .btn { display: none; }
+  .nav__burger { display: flex; }
+  .section__head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .stories__grid { grid-template-columns: 1fr; }
+  .footer__top { grid-template-columns: 1fr; }
+  .story-credit { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar (fills automatically as the reader scrolls) -->
+<div class="read-progress" aria-hidden="true"><div class="read-progress__bar" id="readProgress"></div></div>
+
+<!-- ================================================================
+     NAVIGATION — identical on every page of the site. Don't edit
+     unless the main site nav changes.
+     ================================================================ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Overview<span class="nav__dot">.</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="pillar.html?pillar=places">Places</a>
+      <a href="pillar.html?pillar=coffee-cafes">Coffee &amp; Cafés</a>
+      <a href="pillar.html?pillar=culture">Culture</a>
+      <a href="pillar.html?pillar=people">People</a>
+      <a href="pillar.html?pillar=food">Food</a>
+      <a href="pillar.html?pillar=photo-essays">Photo Essays</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="index.html#letter" class="btn btn--gold btn--sm">Subscribe</a>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__mobile" id="navMobile">
+    <a href="pillar.html?pillar=places">Places</a>
+    <a href="pillar.html?pillar=coffee-cafes">Coffee &amp; Cafés</a>
+    <a href="pillar.html?pillar=culture">Culture</a>
+    <a href="pillar.html?pillar=people">People</a>
+    <a href="pillar.html?pillar=food">Food</a>
+    <a href="pillar.html?pillar=photo-essays">Photo Essays</a>
+    <a href="index.html#letter" class="btn btn--gold btn--sm">Subscribe</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================================================================
+       1. HEADLINE + HERO + ALL THE STORY DETAILS
+       EDIT ME: hero photo (in the <style> block above, .story-hero__bg),
+       category pill, headline, byline name / date / read time.
+       ================================================================ -->
+  <section class="story-hero" id="storyHero">
+    <div class="story-hero__bg" id="storyHeroBg"></div>
+    <div class="story-hero__overlay" aria-hidden="true"></div>
+
+    <div class="story-hero__content">
+      <span class="pill story-hero__tag">Coffee &amp; Cafés</span>
+      <h1 class="story-hero__title">The Last Kapeng Barako Roasters of Batangas</h1>
+    </div>
+
+    <div class="story-hero__byline">
+      <span class="story-hero__avatar" aria-hidden="true"></span>
+      <span>Reyna Santos</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Jul 2, 2026</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>7 min read</span>
+    </div>
+  </section>
+
+  <section class="story-article">
+    <!-- Sticky share rail: copy-link + save. Works out of the box, no editing needed. -->
+    <aside class="story-share">
+      <button class="story-share__btn" id="shareCopy" aria-label="Copy link to this story">
+        <svg viewBox="0 0 24 24" width="17" height="17"><path d="M9 12a3 3 0 0 0 4.24.24l3-3a3 3 0 0 0-4.24-4.24l-1 1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15 12a3 3 0 0 0-4.24-.24l-3 3a3 3 0 0 0 4.24 4.24l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <button class="story-share__btn" id="shareSave" aria-label="Save story" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="17" height="17"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="story-share__note" id="shareNote" role="status" aria-live="polite"></span>
+    </aside>
+
+    <div class="story-article__body">
+
+      <!-- ================================================================
+           2. INTRODUCTION
+           EDIT ME: this is the hook — one strong paragraph that pulls
+           the reader in. Keep it in first-person-of-the-place, not a
+           dry summary.
+           ================================================================ -->
+      <p class="story-lede reveal">
+        Kapeng barako — the liberica variety that once made Batangas synonymous with
+        Philippine coffee — is disappearing acre by acre. What&rsquo;s left is a small,
+        stubborn network of family roasters still processing it the way their
+        grandparents did.
+      </p>
+      <p class="story-p story-p--dropcap reveal">
+        Farmers have been quietly converting barako plots to calamansi and dragon fruit
+        for a decade now, chasing faster, more reliable returns. The beans that remain
+        are sun-dried on bamboo mats, roasted in small batches over wood or charcoal,
+        and ground fresh only when a customer actually shows up. It&rsquo;s slow,
+        inefficient by commercial standards, and exactly why the flavor hasn&rsquo;t
+        been engineered out of it.
+      </p>
+
+      <!-- ================================================================
+           3. PHOTO — a single full-width breather image between
+           the introduction and the background section.
+           EDIT ME: swap .story-photo__img's background-image in the
+           <style> block, and update the caption below.
+           ================================================================ -->
+      <figure class="story-photo reveal">
+        <div class="story-photo__img" id="storyPhoto1"></div>
+        <figcaption>Sun-drying barako cherries on bamboo mats outside Lipa.</figcaption>
+      </figure>
+
+      <!-- ================================================================
+           4. BACKGROUND OF THE TOPIC
+           EDIT ME: give the reader context — history, numbers, why this
+           matters now. This is where you "earn" the rest of the story.
+           ================================================================ -->
+      <h2 class="story-h2 reveal">Background</h2>
+      <p class="story-p reveal">
+        At a roastery outside Lipa, third-generation roaster Bert Ilagan still gauges
+        doneness by the smell and the sound of the beans cracking — no thermometer, no
+        timer. He estimates barako accounts for less than two percent of Batangas&rsquo;s
+        coffee output now, down from what he says was closer to a third when his
+        grandfather started roasting.
+      </p>
+      <p class="story-p reveal">
+        There&rsquo;s a modest revival underway, driven mostly by specialty cafes in
+        Manila willing to pay a premium for traceable, small-batch liberica. Whether
+        that&rsquo;s enough to reverse decades of conversion to other crops is still an
+        open question — but for now, the roasters are still roasting.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       5. SCROLL PICTURE GALLERY — the "wow" moment. Pins the section
+       in place while the reader scrolls, sliding the photos sideways.
+       On phones it automatically becomes a normal swipeable strip.
+       EDIT ME: swap each .story-gallery__img background-image and
+       caption below. Add or remove <figure> blocks as needed — the
+       script auto-measures however many you give it.
+       ================================================================ -->
+  <section class="story-gallery" id="storyGallerySection">
+    <p class="story-gallery__kicker eyebrow eyebrow--light">In the Roastery</p>
+    <div class="story-gallery__pin">
+      <div class="story-gallery__track" id="storyGalleryTrack">
+        <figure class="story-gallery__item">
+          <div class="story-gallery__img" style="background-image: linear-gradient(135deg, #558467, #17433f);"></div>
+          <figcaption>Sun-drying barako cherries on bamboo mats outside Lipa.</figcaption>
+        </figure>
+        <figure class="story-gallery__item">
+          <div class="story-gallery__img" style="background-image: linear-gradient(135deg, #4b1426, #17433f);"></div>
+          <figcaption>A wood-fired roasting drum, still in daily use.</figcaption>
+        </figure>
+        <figure class="story-gallery__item">
+          <div class="story-gallery__img" style="background-image: linear-gradient(135deg, #ac7d88, #4b1426);"></div>
+          <figcaption>Bert Ilagan checking a batch by smell, not thermometer.</figcaption>
+        </figure>
+        <figure class="story-gallery__item">
+          <div class="story-gallery__img" style="background-image: linear-gradient(135deg, #c89a4b, #558467);"></div>
+          <figcaption>Freshly roasted beans, ground only to order.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-article story-article--continued">
+    <aside class="story-share" aria-hidden="true"></aside>
+    <div class="story-article__body">
+
+      <!-- ================================================================
+           6. REALIZATION
+           EDIT ME: this is the turning point — the moment the story's
+           real point clicks into place for the reader. A pull-quote
+           works well here, paired with a paragraph unpacking it.
+           ================================================================ -->
+      <h2 class="story-h2 reveal">The Realization</h2>
+      <blockquote class="story-quote reveal">
+        <p>&ldquo;No thermometer, no timer. You roast it until it smells like it&rsquo;s
+        ready — the same way my grandfather taught me.&rdquo;</p>
+        <cite>Bert Ilagan, third-generation roaster</cite>
+      </blockquote>
+      <p class="story-p reveal">
+        It became clear, standing in that roastery, that what looked like inefficiency
+        from the outside was actually the entire point. Barako survives on farms and
+        in kitchens that never optimized it — and the moment someone tries to speed it
+        up, the flavor that makes it worth saving disappears with the shortcut.
+      </p>
+
+      <!-- ================================================================
+           7. PHOTO / IMAGE GALLERY — a calmer grid layout, deliberately
+           different from the scroll gallery above. Good for a handful
+           of supporting images that don't need the big scroll moment.
+           EDIT ME: swap each .story-photo-grid__img background-image
+           and caption. Add/remove .story-photo-grid__item blocks —
+           the first one automatically spans full width.
+           ================================================================ -->
+      <h2 class="story-h2 reveal">In Pictures</h2>
+      <div class="story-photo-grid reveal">
+        <figure class="story-photo-grid__item">
+          <div class="story-photo-grid__img" style="background-image: linear-gradient(135deg, #558467, #0e2b28);"></div>
+          <figcaption>The roastery at dawn, before the day's first batch.</figcaption>
+        </figure>
+        <figure class="story-photo-grid__item">
+          <div class="story-photo-grid__img" style="background-image: linear-gradient(135deg, #c89a4b, #4b1426);"></div>
+          <figcaption>Green beans, sorted by hand before roasting.</figcaption>
+        </figure>
+        <figure class="story-photo-grid__item">
+          <div class="story-photo-grid__img" style="background-image: linear-gradient(135deg, #ac7d88, #17433f);"></div>
+          <figcaption>A finished cup, brewed the way the roastery drinks it.</figcaption>
+        </figure>
+      </div>
+
+      <!-- ================================================================
+           8. INSIGHTS / KEY TAKEAWAYS
+           EDIT ME: 3–4 short, scannable lines that a reader could walk
+           away with even if they only skimmed the article. Bold the
+           part that matters most in each line.
+           ================================================================ -->
+      <h2 class="story-h2 reveal">Key Takeaways</h2>
+      <ul class="story-takeaways">
+        <li class="reveal">
+          <span class="story-takeaways__num">01</span>
+          <span class="story-takeaways__text"><strong>Barako now makes up less than 2%</strong> of Batangas's coffee output, down from roughly a third a generation ago.</span>
+        </li>
+        <li class="reveal">
+          <span class="story-takeaways__num">02</span>
+          <span class="story-takeaways__text">The flavor depends on an <strong>unautomated, feel-based process</strong> — sun-drying, wood-fire roasting, no thermometer.</span>
+        </li>
+        <li class="reveal">
+          <span class="story-takeaways__num">03</span>
+          <span class="story-takeaways__text"><strong>Manila's specialty cafes are driving a small revival</strong>, paying a premium for traceable, small-batch liberica.</span>
+        </li>
+        <li class="reveal">
+          <span class="story-takeaways__num">04</span>
+          <span class="story-takeaways__text">Whether that revival is enough to reverse the trend is still an <strong>open question</strong> — but the roasters aren't stopping.</span>
+        </li>
+      </ul>
+
+      <!-- ================================================================
+           9. CREDIT — the person the story is actually about (not the
+           byline writer, who's already credited up in the hero).
+           EDIT ME: name, role, and swap the avatar's background-image
+           in the <style> block if you have a real portrait.
+           ================================================================ -->
+      <div class="story-credit reveal">
+        <div class="story-credit__avatar" aria-hidden="true"></div>
+        <div>
+          <div class="story-credit__name">Bert Ilagan</div>
+          <div class="story-credit__role">Third-generation roaster, featured in this story</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SUGGEST-A-STORY CTA — sits after the article and before
+       "Keep Reading". Points to contact.html, which doesn't exist
+       yet — that's the next page we'll build.
+       ================================================================ -->
+  <section class="story-cta">
+    <div class="story-cta__inner">
+      <h2>Know a Story We Should Tell?</h2>
+      <p>If there's a place, a person, or a tradition you think deserves the Overview PH treatment, we want to hear about it.</p>
+      <a href="contact.html" class="btn btn--gold">Email Us</a>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       KEEP READING — related story cards. Hand-pick 3 that make sense
+       to send the reader to next.
+       EDIT ME: swap titles, tags, excerpts, and hrefs.
+       ================================================================ -->
+  <section class="related">
+    <div class="section__head reveal">
+      <div>
+        <p class="eyebrow">Keep Reading</p>
+        <h2>More from Coffee &amp; Cafés</h2>
+      </div>
+    </div>
+    <div class="stories__grid">
+      <article class="story-card reveal">
+        <div class="story-card__media">
+          <span class="pill story-card__tag">Coffee &amp; Cafés</span>
+        </div>
+        <h3><a href="story.html?slug=baguio-third-wave">Baguio's Third-Wave Cafés, Mapped</a></h3>
+        <p class="story-card__excerpt">From Session Road to the market district, ten cups worth the climb.</p>
+        <div class="story-card__meta">
+          <span class="story-card__avatar" aria-hidden="true"></span>
+          <span>Reyna Santos</span><span class="dot" aria-hidden="true"></span><span>Jun 15, 2026</span><span class="dot" aria-hidden="true"></span><span>10 min read</span>
+        </div>
+      </article>
+      <article class="story-card reveal">
+        <div class="story-card__media">
+          <span class="pill story-card__tag">Coffee &amp; Cafés</span>
+        </div>
+        <h3><a href="story.html?slug=sagada-coffee-farmers">Sagada's High-Altitude Coffee Farmers</a></h3>
+        <p class="story-card__excerpt">Arabica grown on terraces once reserved for rice.</p>
+        <div class="story-card__meta">
+          <span class="story-card__avatar" aria-hidden="true"></span>
+          <span>Dane Villaruz</span><span class="dot" aria-hidden="true"></span><span>May 30, 2026</span><span class="dot" aria-hidden="true"></span><span>8 min read</span>
+        </div>
+      </article>
+      <article class="story-card reveal">
+        <div class="story-card__media">
+          <span class="pill story-card__tag">Coffee &amp; Cafés</span>
+        </div>
+        <h3><a href="story.html?slug=kalinaw-coffee-vigan">Kalinaw Coffee House, Vigan</a></h3>
+        <p class="story-card__excerpt">Third-generation roasting inside a 1920s bahay-na-bato on Calle Crisologo.</p>
+        <div class="story-card__meta">
+          <span class="story-card__avatar" aria-hidden="true"></span>
+          <span>Reyna Santos</span><span class="dot" aria-hidden="true"></span><span>Jun 30, 2026</span><span class="dot" aria-hidden="true"></span><span>8 min read</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================================================================
+     FOOTER — identical on every page. Don't edit unless the main
+     site footer changes.
+     ================================================================ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <a href="index.html" class="nav__logo">Overview<span class="nav__dot">.</span></a>
+      <p>Documenting the Philippines worth looking at twice.</p>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/overviewph/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a>
+        <a href="https://www.tiktok.com/@overview.ph?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 3v10.6a2.9 2.9 0 1 1-2.3-2.85" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14 3c.4 2.3 2 3.9 4.3 4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61591678237070" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 21v-7h2.4l.4-3H14V9c0-.9.2-1.5 1.6-1.5H17V5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.4-3.8 3.8V11H8.5v3H11v7h3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <h3>Explore</h3>
+      <a href="pillar.html?pillar=places">Places</a>
+      <a href="pillar.html?pillar=coffee-cafes">Coffee &amp; Cafés</a>
+      <a href="pillar.html?pillar=culture">Culture</a>
+      <a href="pillar.html?pillar=people">People</a>
+      <a href="pillar.html?pillar=food">Food</a>
+      <a href="pillar.html?pillar=photo-essays">Photo Essays</a>
+      <a href="pillar.html?pillar=perspectives">Perspectives</a>
+      <a href="pillar.html?pillar=features">Features</a>
+    </div>
+    <div class="footer__col">
+      <h3>Company</h3>
+      <a href="contact.html#about">About</a>
+      <a href="contact.html#contributors">Contributors</a>
+      <a href="contact.html#contact">Contact</a>
+      <a href="contact.html#suggest">Suggest a Story</a>
+    </div>
+    <div class="footer__col footer__col--newsletter">
+      <h3>Newsletter</h3>
+      <p>Weekly stories, dropped straight into your inbox.</p>
+      <form class="footer__mini-form" id="footerLetterForm" novalidate>
+        <input type="email" id="footerLetterEmail" placeholder="you@email.com" required aria-label="Email address">
+        <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="letter__note" id="footerLetterNote" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© <span id="year"></span> Overview PH. See beyond the surface.</span>
+    <span class="footer__legal"><a href="#">Privacy</a><a href="#">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   All the interactivity for this page — self-contained, no
+   external JS files. You shouldn't need to edit anything below
+   unless you're changing how the page behaves (not what it says).
+   ================================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+
+  function rafThrottle(fn) {
+    let ticking = false;
+    return function (...args) {
+      if (!ticking) {
+        window.requestAnimationFrame(() => { fn.apply(this, args); ticking = false; });
+        ticking = true;
+      }
+    };
+  }
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Sticky nav on scroll ---- */
+  const nav = document.getElementById('nav');
+  const toggleNavState = () => nav.classList.toggle('is-scrolled', window.scrollY > 60);
+  toggleNavState();
+  window.addEventListener('scroll', toggleNavState, { passive: true });
+
+  /* ---- Mobile menu ---- */
+  const burger = document.getElementById('burger');
+  const navMobile = document.getElementById('navMobile');
+  burger.addEventListener('click', () => {
+    const isOpen = navMobile.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  /* ---- Reading progress bar ---- */
+  const progressBar = document.getElementById('readProgress');
+  const updateProgress = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(Math.max(pct, 0), 100)}%`;
+  };
+  window.addEventListener('scroll', rafThrottle(updateProgress), { passive: true });
+  updateProgress();
+
+  /* ---- Parallax hero image ---- */
+  if (!prefersReducedMotion) {
+    const hero = document.getElementById('storyHero');
+    const heroBg = document.getElementById('storyHeroBg');
+    const updateParallax = () => {
+      const heroHeight = hero.offsetHeight;
+      const y = window.scrollY;
+      if (y > heroHeight) return;
+      const progress = y / heroHeight;
+      heroBg.style.transform = `translate3d(0, ${y * 0.35}px, 0) scale(${1 + progress * 0.12})`;
+    };
+    window.addEventListener('scroll', rafThrottle(updateParallax), { passive: true });
+    updateParallax();
+  }
+
+  /* ---- Scroll-reveal for every .reveal element ---- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('is-visible'), i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ---- Scroll picture gallery: pinned horizontal scroll (desktop) ---- */
+  const gallerySection = document.getElementById('storyGallerySection');
+  const track = document.getElementById('storyGalleryTrack');
+  if (gallerySection && track) {
+    const setGalleryHeight = () => {
+      if (window.innerWidth >= 900) {
+        const extra = Math.max(track.scrollWidth - window.innerWidth, 0);
+        gallerySection.style.height = `calc(100vh + ${extra}px)`;
+      } else {
+        gallerySection.style.height = 'auto';
+        track.style.transform = 'none';
+      }
+    };
+    const updateGalleryScroll = () => {
+      if (window.innerWidth < 900) return;
+      const rect = gallerySection.getBoundingClientRect();
+      const scrollable = gallerySection.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+      const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
+      track.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
+    };
+    window.addEventListener('load', setGalleryHeight);
+    window.addEventListener('resize', () => { setGalleryHeight(); updateGalleryScroll(); });
+    window.addEventListener('scroll', rafThrottle(updateGalleryScroll), { passive: true });
+    setGalleryHeight();
+    updateGalleryScroll();
+  }
+
+  /* ---- Share rail: copy link + bookmark toggle ---- */
+  const shareCopy = document.getElementById('shareCopy');
+  const shareNote = document.getElementById('shareNote');
+  let noteTimer;
+  shareCopy.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      shareNote.textContent = 'Link copied';
+    } catch (err) {
+      shareNote.textContent = window.location.href;
+    }
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => { shareNote.textContent = ''; }, 2200);
+  });
+  const shareSave = document.getElementById('shareSave');
+  shareSave.addEventListener('click', () => {
+    const isSaved = shareSave.classList.toggle('is-saved');
+    shareSave.setAttribute('aria-pressed', String(isSaved));
+    shareSave.querySelector('path').setAttribute('fill', isSaved ? 'currentColor' : 'none');
+  });
+
+  /* ---- Footer newsletter form (inline validation, no backend) ---- */
+  const footerForm = document.getElementById('footerLetterForm');
+  const footerInput = document.getElementById('footerLetterEmail');
+  const footerNote = document.getElementById('footerLetterNote');
+  footerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = footerInput.value.trim();
+    footerNote.classList.remove('is-error', 'is-success');
+    if (!value || !value.includes('@')) {
+      footerNote.textContent = 'Please enter a valid email address.';
+      footerNote.classList.add('is-error');
+      return;
+    }
+    footerNote.textContent = `You're on the list — welcome, ${value}.`;
+    footerNote.classList.add('is-success');
+    footerForm.reset();
+  });
+
+  /* ---- Footer year ---- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+});
+</script>
+</body>
+</html>
