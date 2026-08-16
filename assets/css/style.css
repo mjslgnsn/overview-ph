@@ -338,12 +338,23 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
 }
 .hero__bg {
   position: absolute; inset: 0;
+  background-color: #1c4a44;
+}
+.hero__slide {
+  position: absolute; inset: 0;
   background-size: cover;
   background-position: center;
-  background-color: #1c4a44;
-  background-image:
-    linear-gradient(160deg, rgba(23,67,63,0.55), rgba(14,43,40,0.35)),
-    url('../img/hero-forest.jpg');
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  animation: heroSlideZoom 14s ease-out forwards;
+}
+.hero__slide.is-active { opacity: 1; z-index: 1; }
+@keyframes heroSlideZoom {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { animation: none; }
 }
 .hero__overlay {
   position: absolute; inset: 0;
@@ -409,6 +420,18 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   background: var(--cream);
   padding: var(--section-pad) 0;
 }
+.about__banner {
+  max-width: var(--container);
+  margin: 0 auto 60px;
+  padding: 0 40px;
+}
+.about__banner img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -28px rgba(23,67,63,0.35);
+}
 .about__grid {
   max-width: var(--container);
   margin: 0 auto;
@@ -428,6 +451,69 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   color: #40514D;
   margin-bottom: 16px;
   max-width: 58ch;
+}
+
+/* ============================================================
+   ABOUT IN MOTION — brand reel (IG Reels-style vertical video)
+   flanked by two behind-the-scenes photos
+   ============================================================ */
+.about-media {
+  background: var(--forest-deep);
+  padding: var(--section-pad) 40px;
+  text-align: center;
+}
+.about-media__kicker { text-align: center; }
+.about-media__heading {
+  font-family: var(--font-title);
+  font-size: clamp(22px, 2.6vw, 30px);
+  color: var(--cream);
+  margin-bottom: 44px;
+}
+.about-media__grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.about-media__reel {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  margin: 0 auto;
+  box-shadow: 0 40px 70px -24px rgba(0,0,0,0.6);
+  border: 6px solid rgba(248,236,209,0.08);
+}
+.about-media__reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-media__reel figcaption {
+  position: absolute;
+  bottom: 16px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--cream);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+.about-media__photo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 24px 50px -24px rgba(0,0,0,0.5);
+}
+.about-media__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .stat-row {
   display: flex;
@@ -578,12 +664,18 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   background: var(--olive-green);
   flex-shrink: 0;
 }
+.story-card__avatar--photo {
+  object-fit: cover;
+  background: var(--olive-green);
+}
 .story-card__meta .dot::before { content: '·'; }
 
 /* ============================================================
    SPOTLIGHT (reusable component)
    ============================================================ */
 .spotlight-section { background: var(--dark-plum); padding: var(--section-pad) 0; }
+.spotlight-section[hidden] { display: none !important; }
+.spotlight[hidden] { display: none !important; }
 .spotlight {
   max-width: var(--container);
   margin: 0 auto;
@@ -794,6 +886,41 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
 }
 .letter__note.is-error { color: #A6425C; }
 .letter__note.is-success { color: var(--olive-green); }
+
+/* ---- Two-step consent gate (assets/js/subscribe.js) ---- */
+.letter-gate {
+  max-width: 460px;
+  margin: 0 auto;
+}
+.letter-gate__q {
+  font-size: 13.5px;
+  color: #4A5C58;
+  margin-bottom: 16px;
+}
+.letter-gate__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.letter-gate--footer {
+  text-align: left;
+}
+.letter-gate--footer .letter-gate__actions {
+  justify-content: flex-start;
+}
+.letter-gate--footer .letter-gate__q {
+  margin-bottom: 12px;
+}
+/* .letter__form and .footer__mini-form both set display:flex, which at
+   equal CSS specificity can beat the browser's default [hidden]{display:
+   none} rule depending on stylesheet order — this makes sure setting
+   .hidden = true on the form in subscribe.js always actually hides it,
+   instead of overlapping with the consent gate above it. */
+.letter__form[hidden],
+.footer__mini-form[hidden] {
+  display: none !important;
+}
 
 /* ============================================================
    SOCIAL STRIP — centered auto-scrolling carousel
@@ -1193,6 +1320,30 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   color: var(--forest-green);
 }
 
+.story-h2 {
+  font-family: var(--font-title);
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: var(--forest-deep);
+  margin: 36px 0 16px;
+}
+
+.story-figure {
+  margin: 30px 0;
+}
+.story-figure img {
+  width: 100%;
+  border-radius: var(--radius-md, 14px);
+  display: block;
+  object-fit: cover;
+}
+.story-figure figcaption {
+  font-family: var(--font-label);
+  font-size: 12px;
+  color: #6B7A76;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .story-quote {
   margin: 8px 0 30px;
   padding-left: 22px;
@@ -1231,6 +1382,11 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   text-transform: uppercase;
   color: var(--muted-rose);
 }
+
+/* Second article section that renders after an in-article gallery
+   (see story.js) — needs less top padding since the gallery above
+   it already provides the visual break. */
+.story-article--continued { padding-top: 30px; }
 
 /* ============================================================
    STORY GALLERY — pinned horizontal scroll (desktop),
@@ -1402,6 +1558,19 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   margin-bottom: 10px;
   background: linear-gradient(135deg, var(--warm-beige), var(--muted-rose));
 }
+.contributor-card__avatar--photo {
+  object-fit: cover;
+  background: var(--olive-green);
+}
+.contributors__empty {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: rgba(248,236,209,0.6);
+}
 .contributor-card__name {
   font-family: var(--font-title);
   font-size: 15.5px;
@@ -1465,6 +1634,10 @@ h1, h2, h3 { font-weight: 600; line-height: 1.15; color: var(--forest-deep); }
   .contact__grid { grid-template-columns: repeat(2, 1fr); }
   .contributors__grid { grid-template-columns: repeat(2, 1fr); }
   .about__grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-media__grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+  .about-media__reel { order: -1; margin-bottom: 8px; }
+  .about-media__photo { aspect-ratio: 16 / 10; }
+  .about__banner img { aspect-ratio: 4 / 3; }
   .footer__top { grid-template-columns: 1fr 1fr; row-gap: 46px; }
 }
 
